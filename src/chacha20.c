@@ -67,6 +67,8 @@ static void chacha20_block(uint32_t in[16], uint8_t out[64], int num_rounds) {
 static void chacha20_init_state(uint32_t s[16], uint8_t key[32], uint32_t counter, uint8_t nonce[12]) {
     int i;
 
+    // refer: https://dxr.mozilla.org/mozilla-beta/source/security/nss/lib/freebl/chacha20.c
+    // convert magic number to string: "expand 32-byte k"
     s[0] = 0x61707865;
     s[1] = 0x3320646e;
     s[2] = 0x79622d32;
