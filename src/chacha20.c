@@ -86,7 +86,7 @@ static void chacha20_init_state(uint32_t s[16], uint8_t key[32], uint32_t counte
 }
 
 void ChaCha20XOR(uint8_t key[32], uint32_t counter, uint8_t nonce[12], uint8_t *in, uint8_t *out, int inlen) {
-    uint8_t i, j;
+    int i, j;
 
     uint32_t s[16];
     uint8_t block[64];

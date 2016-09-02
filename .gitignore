@@ -31,3 +31,8 @@
 # Debug files
 *.dSYM/
 *.su
+
+chacha20_test
+chacha20_example
+libchacha20.so
+libchacha20.a

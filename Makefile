@@ -14,21 +14,24 @@ vpath % bin
 
 chacha20_test: test/chacha20_test.c chacha20.c
 	$(CC) test/chacha20_test.c $(CFLAGS) $(LDFLAGS) -o $@
-	mv $@ bin/
+	./$@
+	rm -rf ./$@
 
 chacha20_example: example/chacha20_example.c chacha20.c
 	$(CC) $^ $(CFLAGS) $(LDFLAGS) -o $@
-	mv $@ bin/
+	./$@
+	rm -rf ./$@
 
 lib%.a: %.c
 	ar rcs $@ $^
-	mv $@ bin/
 
 lib%.so: %.c
 	$(CC) $^ $(SOFLAGS) -o $@
-	mv $@ bin/
 
 .PHONY : clean
 clean :
-	rm -rf bin/*
+	rm -rf chacha20_test
+	rm -rf chacha20_example
+	rm -rf libchacha20.so
+	rm -rf libchacha20.a
 	rm -rf *.dSYM
