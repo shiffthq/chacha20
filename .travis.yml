@@ -1,0 +1,13 @@
+language: c
+
+sudo: false
+
+compiler:
+  - clang
+  - gcc
+
+script:
+  - make chacha20_test
+  - make chacha20_example
+  - make libchacha20.so
+  - make libchacha20.a
