@@ -4,7 +4,7 @@ CFLAGS := -g -Wall -O3 -DLINUX -Isrc
 
 SOFLAGS := -g -DLINUX -shared -fPIC -Isrc
 
-LDFLAGS := -Wl,-rpath,bin,-rpath,-Lbin,-lstdc++
+LDFLAGS := -Wl,-rpath,bin,-rpath,-Lbin,-lrt,-lstdc++
 
 # vpath indicate the searching path of the according file type
 vpath %.c src
