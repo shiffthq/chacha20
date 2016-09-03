@@ -4,20 +4,22 @@ CFLAGS := -g -Wall -O3 -DLINUX -Isrc
 
 SOFLAGS := -g -DLINUX -shared -fPIC -Isrc
 
-LDFLAGS := -Wl,-rpath,bin,-rpath,-Lbin,-lrt,-lstdc++
+LDFLAGS := -Wl,-rpath,bin,-rpath,-lstdc++,-lrt
+
+TARGET = chacha20
 
 # vpath indicate the searching path of the according file type
 vpath %.c src
 vpath %.h src
-vpath %.so bin
-vpath % bin
 
-chacha20_test: test/chacha20_test.c chacha20.c
-	$(CC) test/chacha20_test.c $(CFLAGS) $(LDFLAGS) -o $@
+all: lib$(TARGET).so lib$(TARGET).a $(TARGET)_test $(TARGET)_example
+
+$(TARGET)_test: test/$(TARGET)_test.c $(TARGET).c
+	$(CC) test/$(TARGET)_test.c $(CFLAGS) $(LDFLAGS) -o $@
 	./$@
 	rm -rf ./$@
 
-chacha20_example: example/chacha20_example.c chacha20.c
+$(TARGET)_example: example/$(TARGET)_example.c $(TARGET).c
 	$(CC) $^ $(CFLAGS) $(LDFLAGS) -o $@
 	./$@
 	rm -rf ./$@
@@ -30,8 +32,8 @@ lib%.so: %.c
 
 .PHONY : clean
 clean :
-	rm -rf chacha20_test
-	rm -rf chacha20_example
-	rm -rf libchacha20.so
-	rm -rf libchacha20.a
+	rm -rf $(TARGET)_test
+	rm -rf $(TARGET)_example
+	rm -rf lib$(TARGET).so
+	rm -rf lib$(TARGET).a
 	rm -rf *.dSYM
