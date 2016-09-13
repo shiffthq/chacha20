@@ -1,10 +1,15 @@
+OS := $(shell uname)
+
 CC := gcc
 
 CFLAGS := -g -Wall -O3 -DLINUX -Isrc
 
 SOFLAGS := -g -DLINUX -shared -fPIC -Isrc
 
-LDFLAGS := -Wl,-rpath,bin,-rpath,-lstdc++,-lrt
+LDFLAGS := -Wl,-rpath,bin,-rpath,-lstdc++
+ifneq ($(OS), Darwin)
+	LDFLAGS := $(LDFLAGS),-lrt
+endif
 
 TARGET = chacha20
 
